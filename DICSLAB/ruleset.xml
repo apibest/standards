@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="DICSLAB">
+    <description>Digital Consulting Laboratory coding standard</description>
+
+    <rule ref="DICSLAB.Commenting.BlockComment"/>
+    <rule ref="DICSLAB.Commenting.ClassComment"/>
+    <rule ref="DICSLAB.Commenting.DocCommentAlignment"/>
+    <rule ref="DICSLAB.Commenting.EmptyCatchComment"/>
+    <rule ref="DICSLAB.Commenting.FileComment"/>
+    <rule ref="DICSLAB.Commenting.FunctionComment"/>
+    <rule ref="DICSLAB.Commenting.FunctionCommentThrowTag"/>
+    <rule ref="DICSLAB.Commenting.InlineComment"/>
+    <rule ref="DICSLAB.Commenting.PostStatementComment"/>
+    <rule ref="DICSLAB.Commenting.VariableComment"/>
+
+    <!-- Include the whole PSR-2 standard -->
+    <rule ref="PSR2"/>
+
+    <!-- Tweaks to metrics -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+        <properties>
+            <property name="complexity" value="20"/>
+            <property name="absoluteComplexity" value="100"/>
+        </properties>
+    </rule>
+    <rule ref="Generic.Metrics.NestingLevel">
+        <properties>
+            <property name="nestingLevel" value="5"/>
+            <property name="absoluteNestingLevel" value="50"/>
+        </properties>
+    </rule>
+
+</ruleset>
