@@ -10,6 +10,7 @@
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @author    Felix Brandt <mail@felixbrandt.de>
  * @author    Taras Omelianenko <t.omelianenko@dicslab.com>
+ * @author    Denis Alexeev <d.alexeev@dicslab.com>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
  * @copyright 2013-2014 DICSLAB LLC (EDRPOU 38879176)
  * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
@@ -45,6 +46,7 @@ if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) ==
  * @package   PHP_CodeSniffer
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
+ * @author    Felix Brandt <mail@felixbrandt.de>
  * @author    Taras Omelianenko <t.omelianenko@dicslab.com>
  * @author    Denis Alexeev <d.alexeev@dicslab.com>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
