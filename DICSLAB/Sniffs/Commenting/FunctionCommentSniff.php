@@ -55,7 +55,7 @@ if (class_exists('PHP_CodeSniffer_CommentParser_FunctionCommentParser', true) ==
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class DICSLAB_Sniffs_Commenting_FunctionCommentSniff implements PEAR_Sniffs_Commenting_FunctionCommentSniff
+class DICSLAB_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
 {
     /**
      * Process the see tags.
@@ -70,7 +70,36 @@ class DICSLAB_Sniffs_Commenting_FunctionCommentSniff implements PEAR_Sniffs_Comm
             return;
         }
 
-        parent::processReturn($commentStart);
+        $sees = $this->commentParser->getSees();
+        if (empty($sees) === false) {
+            $tagOrder = $this->commentParser->getTagOrders();
+            $index    = array_keys($this->commentParser->getTagOrders(), 'see');
+            foreach ($sees as $i => $see) {
+                $errorPos = ($commentStart + $see->getLine());
+                $since    = array_keys($tagOrder, 'since');
+                if (count($since) === 1 && $this->_tagIndex !== 0) {
+                    $this->_tagIndex++;
+                    if ($index[$i] !== $this->_tagIndex) {
+                        $error = 'The @see tag is in the wrong order; the tag precedes @return';
+                        $this->currentFile->addError($error, $errorPos, 'SeeOrder');
+                    }
+                }
+
+                $content = $see->getContent();
+                if (empty($content) === true) {
+                    $error = 'Content missing for @see tag in function comment';
+                    $this->currentFile->addError($error, $errorPos, 'EmptySee');
+                    continue;
+                }
+
+                $spacing = substr_count($see->getWhitespaceBeforeContent(), ' ');
+                if ($spacing !== 4) {
+                    $error = '@see tag indented incorrectly; expected 4 spaces but found %s';
+                    $data  = array($spacing);
+                    $this->currentFile->addError($error, $errorPos, 'SeeIndent', $data);
+                }
+            }//end foreach
+        }//end if
 
     }//end processSees()
 
@@ -120,13 +149,13 @@ class DICSLAB_Sniffs_Commenting_FunctionCommentSniff implements PEAR_Sniffs_Comm
      *
      * @return void
      */
-    protected function processParams($commentStart, $commentEnd)
+    protected function processParams($commentStart)
     {
         if ($this->isInheritDoc()) {
             return;
         }
 
-        parent::processParams($commentStart, $commentEnd);
+        parent::processParams($commentStart);
     }//end processParams()
 
 
